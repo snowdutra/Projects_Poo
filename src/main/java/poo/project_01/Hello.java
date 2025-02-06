@@ -1,4 +1,4 @@
-package poo.aula01;
+package poo.projeto_01;
 
 public class Hello {
 
