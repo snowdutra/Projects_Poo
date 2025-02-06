@@ -1,4 +1,4 @@
-# espm.poo25.1
+# Programação Orientada a Objetos
 
 Exemplo de Hello World!
 ```java
