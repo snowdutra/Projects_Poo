@@ -1,4 +1,4 @@
-package poo.projeto_01;
+package poo.project_01;
 
 public class TabuadaFor {
     

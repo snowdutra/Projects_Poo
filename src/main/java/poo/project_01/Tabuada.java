@@ -1,6 +1,4 @@
-package poo.projeto_01;
-
-
+package poo.project_01;
 public class Tabuada {
     
     public static void main(String[] args) {
