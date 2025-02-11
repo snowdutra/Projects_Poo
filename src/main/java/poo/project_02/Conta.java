@@ -1,36 +1,33 @@
 package poo.project_02;
 
 public class Conta {
+
     private String id;
     private double saldo = 0;
 
     public void depositar(double valor) {
-        this.saldo += valor;
+        if (valor > 0) {
+            this.saldo += valor;
+        }
     }
-    /* realiza um saque da conta do usúario
-     * restrito ao saldo da conta e não permite 
+
+    /* 
+    * realiza um saque da conta do usuario
+     * restrito ao saldo da conta e nao permite
      * valores negativos
      */
-    public void sacar(float valor) {
-       if (saldo >= valor) {
-        this.saldo -= valor;
-       }
+    public void sacar(double valor) {
+        if (valor > 0 && saldo >= valor) {
+            this.saldo -= valor;
+        }
+    } 
+
+    public String getId() {
+        return id;
     }
 
     public double getSaldo() {
-        return this.saldo;
-    }
-
-    public String getId() { 
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
+        return saldo;
     }
 
 }
