@@ -1,12 +1,18 @@
 package poo.project_02;
 
 public class Fatorial {
-    public static void main(String[] args) {
-        int n = 5;
-        int f = 1;
-        for (int i = 1; i <= n; i++) {
-            f = f * i;
+
+    public static long fatorial(long n) {
+        long resultado = 1;
+        for (long i = n; i > 1; i--) {
+            resultado *= i;
         }
+        return resultado;
+    }
+
+    public static void main(String[] args) {
+        int n = args.length == 0 ? 0 : Integer.parseInt(args[0]);
+        long f = fatorial(n);
         System.out.println(n + "! = " + f);
     }
 }
