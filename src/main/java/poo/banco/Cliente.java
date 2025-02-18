@@ -11,7 +11,7 @@ public class Cliente {
         this.name = name;
     }
 
-    public String getId() {    
+    public String getId() {
         return id;
     }
 
@@ -19,5 +19,9 @@ public class Cliente {
         return name;
     }
 
-
+    @Override
+    public String toString() {
+        return "[" + id + "]: " + name;
+    }
+    
 }
