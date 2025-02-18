@@ -1,11 +1,16 @@
 package poo.project_04;
 
-import  java.util.
+import poo.banco.Conta;
 
 public class OperaConta {
 
     public static void main(String[] args) {
-        system
+        Conta c1 = new Conta();
+        System.out.println(c1);
+
+        Conta c2 = new Conta();
+        System.out.println(c2);
+
     }
     
 }
