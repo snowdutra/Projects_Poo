@@ -1,4 +1,4 @@
-package poo.project_04;
+package poo.project_banco;
 
 import poo.banco.Conta;
 
