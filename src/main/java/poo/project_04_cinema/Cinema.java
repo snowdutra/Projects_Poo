@@ -2,7 +2,8 @@ package poo.project_04_cinema;
 
 public class Cinema {
     
-    private Cinema cinema = new Cinema();
+    
+    private Cinema cinema instance = new Cinema();
     
     // construtor foi escondido 
     private Cinema() {
