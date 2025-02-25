@@ -1,4 +1,4 @@
-package poo.project_03;
+package poo.project_03_banco_simples;
 
 public class OperaString {
     

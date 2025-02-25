@@ -1,4 +1,4 @@
-package poo.project_01;
+package poo.project_01_teste;
 public class Hello {
 
     public static void main(String[] args) {
