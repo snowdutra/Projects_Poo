@@ -1,4 +1,4 @@
-package poo.project_04_cinema;
+package poo.project_05_cinema;
 
 public class ExemploSingleton {
 
