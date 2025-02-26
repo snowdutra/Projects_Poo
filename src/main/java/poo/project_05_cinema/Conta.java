@@ -4,8 +4,19 @@ import java.util.UUID;
 
 public class Conta {
     
-    public String id = UUID.randomUUID().toString();
-    public double saldo = 0;
-    public final double LIMITE = 100;
+    private String id = UUID.randomUUID().toString();
+    private double saldo = 0;
+    private final double LIMITE = 100;
 
+    public String getId() {
+        return id;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
 }
