@@ -1,16 +1,18 @@
 package poo.project_05_cinema;  
 
+import java.util.Date;
 
-public class Ator{
+public class Ator {
+
     private String nome;
-    private String dtnascimento;
+    private Date dtNascimento;
 
-    public String getNome(){
+    public String getNome() {
         return nome;
     }
 
-    public Date getDtnascimento(){
-        return dtnascimento;
+    public Date getDtNascimento() {
+        return dtNascimento;
     }
-
-}
+    
+}   

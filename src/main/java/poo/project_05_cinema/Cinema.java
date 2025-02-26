@@ -1,15 +1,20 @@
 package poo.project_05_cinema;
 
+/* 
+ * Exemplo de um Singleton
+ */
 public class Cinema {
-    
-    
-    private Cinema cinema instance = new Cinema();
-    
-    // construtor foi escondido 
+
+    public static final String NOME = "ESPM Cine";
+    private static Cinema instance = new Cinema();
+
+    // construtor foi escondido
     private Cinema() {
+
     }
 
-    public Cinema getInstance() {
-        return this.cinema;
+    public static Cinema getInstance() {
+        return instance;
     }
+    
 }
