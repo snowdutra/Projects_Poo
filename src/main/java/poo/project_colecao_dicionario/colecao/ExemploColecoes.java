@@ -1,34 +1,36 @@
 package poo.project_colecao_dicionario.colecao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
-import java.util.HashSet;
-
+import java.util.TreeSet;
 
 public class ExemploColecoes {
+
     public static void main(String[] args) {
         
-
         List<String> listNomes = new ArrayList<>();
-        listNomes.add("Gustavo");
-        listNomes.add("Beto");
-        listNomes.add("Carlos");
+        listNomes.add("Guilherme");
+        listNomes.add("Rafael");
+        listNomes.add("Sergio");
+        listNomes.add("Flavio");
+        listNomes.add("Marcelo");
         print(listNomes);
 
-
-        Set<String> setNomes = new HashSet<>();
-        setNomes.add("Gustavo");
-        setNomes.add("Beto");
-        setNomes.add("Carlos");
+        Set<String> setNomes = new TreeSet<>();
+        setNomes.add("Guilherme");
+        setNomes.add("Rafael");
+        setNomes.add("Sergio");
+        setNomes.add("Flavio");
+        setNomes.add("Marcelo");
         print(setNomes);
-       
+
     }
 
     public static void print(Collection<?> c) {
-        for(Object item : c) {
-            System.out.println(item);
-        }
+        c.forEach(e -> System.out.print(e + "  "));
+        System.out.println();
     }
+    
 }
