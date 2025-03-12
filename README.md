@@ -120,28 +120,27 @@ do seu cartão de sócio, endereço, telefone e e-mail.
 
 ### Diagrama de Classes do Banco
 
-``` mermaid 
-
+``` mermaid
 classDiagram
-    class Conta{
-        - String id 
+    class Conta {
+        - String id
         - double saldo
         - Cliente cliente
         + sacar(double valor)
         + depositar(double valor)
     }
-    class Cliente{
+    class Cliente {
         - String id
         - String nome
         - List<Conta> contas
     }
-    class PessoaFisica{
+    class PessoaFisica {
         - String cpf
     }
-    class PessoaJuridica{
+    class PessoaJuridica {
         - String cnpj
     }
     Conta *-- Cliente
     Cliente <|-- PessoaFisica
-    Cliente <|-- PessoaJuridica 
+    Cliente <|-- PessoaJuridica
 ```

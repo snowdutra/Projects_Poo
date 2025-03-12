@@ -2,20 +2,20 @@ package poo.banco;
 
 public class PessoaFisica extends Cliente {
 
-    private final String cpf;
+    private String cpf;
 
-    public PessoaFisica(String nome, String cpf) {
-        super(nome);
+    public PessoaFisica(String name, String cpf) {
+        super(name);
         this.cpf = cpf;
     }
 
     public String getCpf() {
         return cpf;
     }
-
+    
     @Override
     public String toString() {
-        return String.format("[%s] - CPF: %s", super.toString(), cpf);
+        return super.toString() + " (" + cpf + ")";
     }
-}
 
+}

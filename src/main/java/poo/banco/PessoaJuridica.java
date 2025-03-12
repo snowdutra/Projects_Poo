@@ -2,20 +2,15 @@ package poo.banco;
 
 public class PessoaJuridica extends Cliente {
 
-    private final String cnpj;
+    private String cnpj;
 
-    public PessoaJuridica(String nome, String cnpj) {
-        super(nome);
+    public PessoaJuridica(String name, String cnpj) {
+        super(name);
         this.cnpj = cnpj;
     }
 
     public String getCnpj() {
         return cnpj;
     }
-
-    @Override
-    public String toString() {
-        return String.format("[%s] - CNPJ: %s", super.toString(), cnpj);
-    }
+    
 }
-
