@@ -9,7 +9,7 @@ public class Terminal {
 
     public void run() {
         this.scanner = new Scanner(System.in);
-        this.banco = new Banco("Mogi International Bank");
+        this.banco = new Banco("International Bank");
         while (true) {
 
             System.out.print("> ");
@@ -27,7 +27,7 @@ public class Terminal {
             }
         }
         scanner.close();
-        System.out.println("bye bye!");
+        System.out.println("Até mais!");
     }
 
     private void listCustomers() {
