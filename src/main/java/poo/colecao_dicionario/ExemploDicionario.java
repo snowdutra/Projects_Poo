@@ -1,4 +1,4 @@
-package poo.colecao_dicionario.colecao;
+package poo.colecao_dicionario;
 
 import java.util.HashMap;
 import java.util.Map;
