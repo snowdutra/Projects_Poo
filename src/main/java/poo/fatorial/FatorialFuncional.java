@@ -1,4 +1,4 @@
-package poo.project_02_fatorial;
+package poo.fatorial;
 
 public class FatorialFuncional {
     public static void main(String[] args) {

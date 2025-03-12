@@ -1,11 +1,13 @@
-package poo.project_01_teste;
-public class TabuadaFor {
+package poo.teste;
+public class Tabuada {
     
     public static void main(String[] args) {
         int n = 7;
-        for (int i = 0; i <= 10; i++) {
+        int i = 0;
+        while (i <= 10) {
             System.out.println(n + " x " + i + " = " + (n * i));
-        }        
+            i++;
+        }   
     }
 
 }

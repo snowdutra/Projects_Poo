@@ -1,4 +1,4 @@
-package poo.project_03_banco_simples;
+package poo.banco_simples;
 
 public class Conta {
 

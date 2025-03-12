@@ -1,4 +1,4 @@
-package poo.project_02_fatorial;
+package poo.fatorial;
 
 public class Fatorial {
 

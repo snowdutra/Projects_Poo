@@ -60,7 +60,7 @@ Para parar o cluster de containers, utilize o comando:
 docker compose down
 ```
 
-### Exercício Selmini 1
+### Exercício 1
 
 Identifique os objetos no problema abaixo:
 
@@ -106,7 +106,7 @@ classDiagram
 ```
 
 
-### Exercício Selmini 2
+### Exercício 2
 
 Identifique os objetos no problema abaixo:
 

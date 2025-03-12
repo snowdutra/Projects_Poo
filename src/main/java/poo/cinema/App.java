@@ -1,4 +1,4 @@
-package poo.project_05_cinema;
+package poo.cinema;
 
 public class App {
     public static void main(String[] args) {

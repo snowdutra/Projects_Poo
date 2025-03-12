@@ -1,4 +1,4 @@
-package poo.project_05_cinema;
+package poo.cinema;
 
 import java.util.UUID;
 

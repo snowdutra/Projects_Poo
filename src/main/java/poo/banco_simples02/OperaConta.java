@@ -1,6 +1,6 @@
-package poo.project_04_banco;
+package poo.banco_simples02;
 
-import poo.banco.Conta;
+import poo.banco_simples.Conta;
 
 public class OperaConta {
 
