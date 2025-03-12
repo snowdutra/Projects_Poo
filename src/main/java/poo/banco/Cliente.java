@@ -6,7 +6,7 @@ public class Cliente {
 
     private String id = UUID.randomUUID().toString();
     private final String name;
-
+    
     public Cliente(String name) {
         this.name = name;
     }
