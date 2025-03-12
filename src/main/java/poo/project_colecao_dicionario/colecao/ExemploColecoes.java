@@ -1,4 +1,4 @@
-package poo.project_colecao_dicionario.colecao;
+package poo.colecao_dicionario.colecao;
 
 import java.util.ArrayList;
 import java.util.Collection;
