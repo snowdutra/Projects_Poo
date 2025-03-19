@@ -124,7 +124,7 @@ do seu cartão de sócio, endereço, telefone e e-mail.
 classDiagram
     class Conta {
         - String id
-        - double saldo
+        # double saldo
         - Cliente cliente
         + sacar(double valor)
         + depositar(double valor)
@@ -140,7 +140,16 @@ classDiagram
     class PessoaJuridica {
         - String cnpj
     }
+    class ContaCorrente {
+        - double limite
+        + sacar(double valor)
+    }
+    class ContaPoupanca {
+        + sacar(double valor)
+    }
     Conta *-- Cliente
+    Conta <|-- ContaCorrente
+    Conta <|-- ContaPoupanca
     Cliente <|-- PessoaFisica
     Cliente <|-- PessoaJuridica
 ```
