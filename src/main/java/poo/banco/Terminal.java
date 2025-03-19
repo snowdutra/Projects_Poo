@@ -9,7 +9,7 @@ public class Terminal {
 
     public void run() {
         this.scanner = new Scanner(System.in);
-        this.banco = new Banco("International Bank");
+        this.banco = new Banco("Mogi International Bank");
         while (true) {
 
             System.out.print("> ");
@@ -27,7 +27,7 @@ public class Terminal {
             }
         }
         scanner.close();
-        System.out.println("Até mais!");
+        System.out.println("bye bye!");
     }
 
     private void listCustomers() {
@@ -63,6 +63,7 @@ public class Terminal {
         // nao eh possivel, pois a classe cliente
         // eh abstrata
         // Cliente cliente = new Cliente(name);
+
         return cliente;
     }
     
