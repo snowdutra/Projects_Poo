@@ -1,5 +1,6 @@
 package poo.banco;
 
+import java.util.List;
 import java.util.UUID;
 
 public abstract class Conta {
@@ -7,11 +8,21 @@ public abstract class Conta {
     private final String id = UUID.randomUUID().toString();
     protected double saldo;
     protected final Cliente cliente;
+    private final List<Transacao> transacoes; // Lista de transações
 
     public Conta(Cliente cliente) {
         this.cliente = cliente;
         this.saldo = 0;
     }
+
+    public void listarTransacoes() {
+        if (transacoes.isEmpty()) {
+            System.out.println("Nenhuma transação encontrada.");
+        } else {
+            transacoes.forEach(System.out::println);
+        }
+    }
+    
 
     public abstract void sacar(double valor);
 
