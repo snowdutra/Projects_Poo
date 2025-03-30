@@ -10,119 +10,157 @@ public class Terminal {
     public void run() {
         try {
             this.scanner = new Scanner(System.in);
-            this.banco = new Banco("International Bank");
-            System.out.println();
-            System.out.println(banco.getName());
-            System.out.println();
+            this.banco = new Banco("ESPM Bank");
+            System.out.println("\n" + banco.getName() + "\n");
+
             Cliente atualCliente = null;
+            Conta atualConta = null;
+
             while (true) {
+                String prompt = (atualCliente == null) ? "" : atualCliente.getName() + " > ";
+                System.out.print(prompt);
+                String line = scanner.nextLine().trim();
 
-                try {
-
-                    String prompt = "";
-                    prompt +=
-                        atualCliente == null
-                        ? ""
-                        : atualCliente.getName();
-
-                    System.out.print(prompt + "> ");
-                    String line = scanner.nextLine().trim();
-                    if (line.equals("exit")) {
-                        break;
-                    } else if (line.equals("help")) {
+                switch (line) {
+                    case "exit":
+                        return;
+                    case "help":
                         printHelp();
-                    } else if (line.equals("1")) {
-                        // cria cliente
+                        break;
+                    case "1":
                         atualCliente = createCustomer();
-                        banco.getClientes().add(atualCliente);
-                    } else if (line.equals("2")) {
-                        listCustomers();
-                    } else if (line.equals("3")) {
-                        Conta conta = createAccount(atualCliente);
-                    } else if (line.length() == 0) {
-
-                    } else {
-                        throw new UnsupportedOperationException("invalid command");
-                    }
-                } catch (UnsupportedOperationException e) {
-                    System.err.println(e.getMessage());
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        banco.adicionarCliente(atualCliente);
+                        break;
+                    case "2":
+                        banco.listarClientes();
+                        break;
+                    case "3":
+                        if (atualCliente == null) {
+                            System.err.println("Erro: Nenhum cliente selecionado.");
+                            break;
+                        }
+                        atualConta = createAccount(atualCliente);
+                        banco.adicionarConta(atualConta);
+                        break;
+                    case "4":
+                        if (atualConta == null) {
+                            System.err.println("Erro: Nenhuma conta selecionada.");
+                            break;
+                        }
+                        realizarDeposito(atualConta);
+                        break;
+                    case "5":
+                        if (atualConta == null) {
+                            System.err.println("Erro: Nenhuma conta selecionada.");
+                            break;
+                        }
+                        realizarSaque(atualConta);
+                        break;
+                    case "6":
+                        if (atualConta == null) {
+                            System.err.println("Erro: Nenhuma conta selecionada.");
+                            break;
+                        }
+                        atualConta.listarTransacoes();
+                        break;
+                    default:
+                        System.err.println("Comando inválido.");
+                        break;
                 }
             }
-        } catch(Exception e) {
-            e.printStackTrace();
         } finally {
-            if (scanner != null) {
-                scanner.close();
-            }
-            System.out.println("bye bye!");    
+            if (scanner != null) scanner.close();
+            System.out.println("bye bye!");
         }
-    }
-
-    private void listCustomers() {
-        // for (Cliente c: banco.getClientes()) {
-        //     System.out.println(c);
-        // }
-        banco.getClientes().stream().forEach(c -> {
-            System.out.println(c);
-        });
     }
 
     private Cliente createCustomer() {
-
-        Cliente cliente;
-
         System.out.print("Nome: ");
         String name = scanner.nextLine().trim();
 
-        System.out.print("Tipo Fisica|Juridica [f|j]: ");
-        String tipo = scanner.nextLine().trim();
-        if (tipo.trim().toLowerCase().equals("f")) {
-            String cpf = null;
-            while (true) {
-                System.out.print("CPF: ");
-                cpf = scanner.nextLine().trim();
-                if (Util.isCpf(cpf)) break;
-                System.out.println("CPF invalido");
-            }
-            cliente = new PessoaFisica(name, cpf);
-        } else {
+        System.out.print("Tipo [f] Física | [j] Jurídica: ");
+        String tipo = scanner.nextLine().trim().toLowerCase();
+
+        if (tipo.equals("f")) {
+            return new PessoaFisica(name, solicitarCpf());
+        } else if (tipo.equals("j")) {
             System.out.print("CNPJ: ");
-            String cnpj = scanner.nextLine().trim();
-            cliente = new PessoaJuridica(name, cnpj);
+            return new PessoaJuridica(name, scanner.nextLine().trim());
+        } else {
+            System.err.println("Tipo inválido. Cliente não criado.");
+            return null;
         }
-
-        // nao eh possivel, pois a classe cliente
-        // eh abstrata
-        // Cliente cliente = new Cliente(name);
-
-        return cliente;
     }
-    
-    private void printHelp() {
-        String help = "";
-        help += "\n  1. criar cliente";
-        help += "\n  2. listar clientes";
-        help += "\n  3. criar conta";
-        System.out.println(help);
+
+    private String solicitarCpf() {
+        String cpf;
+        do {
+            System.out.print("CPF: ");
+            cpf = scanner.nextLine().trim();
+            if (!Util.isCpf(cpf)) {
+                System.out.println("CPF inválido. Tente novamente.");
+            }
+        } while (!Util.isCpf(cpf));
+        return cpf;
     }
 
     private Conta createAccount(Cliente cliente) {
-        if (cliente == null) {
-            throw new RuntimeException("Cliente nao definido");
-        }
-        Conta conta;
-        System.out.print("Tipo [(P)oupanca|(C)orrente]: ");
+        System.out.print("Tipo [(P) Poupança | (C) Corrente | (R) Rendimento]: ");
         String tipo = scanner.nextLine().trim().toLowerCase();
 
-        if (tipo.equals("p")) {
-            conta = new ContaPoupanca(cliente);
-        } else {
-            conta = new ContaCorrente(cliente);
+        switch (tipo) {
+            case "p":
+                return new ContaPoupanca(cliente);
+            case "c":
+                return criarContaCorrente(cliente);
+            case "r":
+                return criarContaRendimento(cliente);
+            default:
+                System.err.println("Erro: Tipo de conta inválido.");
+                return null;
         }
-
-        return conta;
     }
 
+    private ContaCorrente criarContaCorrente(Cliente cliente) {
+        System.out.print("Deseja limite? (S/N): ");
+        if (scanner.nextLine().trim().equalsIgnoreCase("s")) {
+            System.out.print("Informe o limite: ");
+            double limite = Double.parseDouble(scanner.nextLine().trim());
+            return new ContaCorrente(cliente, limite);
+        }
+        return new ContaCorrente(cliente);
+    }
+
+    private ContaRendimento criarContaRendimento(Cliente cliente) {
+        System.out.print("Informe a taxa de rendimento (%): ");
+        double taxa = Double.parseDouble(scanner.nextLine().trim());
+        return new ContaRendimento(cliente, taxa);
+    }
+
+    private void realizarDeposito(Conta conta) {
+        System.out.print("Valor do depósito: ");
+        double valor = Double.parseDouble(scanner.nextLine().trim());
+        conta.depositar(valor);
+        System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+    }
+
+    private void realizarSaque(Conta conta) {
+        System.out.print("Valor do saque: ");
+        double valor = Double.parseDouble(scanner.nextLine().trim());
+        try {
+            conta.sacar(valor);
+            System.out.println("Saque de R$" + valor + " realizado com sucesso.");
+        } catch (RuntimeException e) {
+            System.err.println("Erro: " + e.getMessage());
+        }
+    }
+
+    private void printHelp() {
+        System.out.println("\n 1. Criar cliente");
+        System.out.println(" 2. Listar clientes");
+        System.out.println(" 3. Criar conta");
+        System.out.println(" 4. Depositar");
+        System.out.println(" 5. Sacar");
+        System.out.println(" 6. Listar transações");
+    }
 }

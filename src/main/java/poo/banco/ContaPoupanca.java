@@ -16,5 +16,4 @@ public class ContaPoupanca extends Conta {
             throw new RuntimeException("Saldo insuficiente");
         }
     }
-    
 }

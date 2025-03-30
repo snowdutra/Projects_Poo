@@ -22,5 +22,4 @@ public class PessoaFisica extends Cliente {
     public String toString() {
         return super.toString() + " (" + cpf + ")";
     }
-
 }

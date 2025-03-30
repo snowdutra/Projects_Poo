@@ -2,7 +2,7 @@ package poo.banco;
 
 public class ContaCorrente extends Conta {
 
-    private double limite = 0;
+    private double limite;
 
     public ContaCorrente(Cliente cliente) {
         this(cliente, 10);
@@ -13,11 +13,6 @@ public class ContaCorrente extends Conta {
         this.limite = limite;
     }
 
-    /* 
-     * realiza um saque da conta do usuario
-     * restrito ao saldo da conta e nao permite
-     * valores negativos
-     */
     @Override
     public void sacar(double valor) {
         if (valor < 0) {
@@ -29,6 +24,4 @@ public class ContaCorrente extends Conta {
             throw new RuntimeException("Limite excedido");
         }
     }
-
-    
 }
