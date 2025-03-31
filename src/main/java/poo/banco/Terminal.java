@@ -29,7 +29,9 @@ public class Terminal {
                         break;
                     case "1":
                         atualCliente = createCustomer();
-                        banco.adicionarCliente(atualCliente);
+                        if (atualCliente != null) {
+                            banco.adicionarCliente(atualCliente);
+                        }
                         break;
                     case "2":
                         banco.listarClientes();
@@ -40,7 +42,9 @@ public class Terminal {
                             break;
                         }
                         atualConta = createAccount(atualCliente);
-                        banco.adicionarConta(atualConta);
+                        if (atualConta != null) {
+                            banco.adicionarConta(atualConta);
+                        }
                         break;
                     case "4":
                         if (atualConta == null) {
@@ -164,3 +168,4 @@ public class Terminal {
         System.out.println(" 6. Listar transações");
     }
 }
+

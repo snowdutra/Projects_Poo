@@ -6,22 +6,22 @@ public class ContaRendimento extends Conta {
 
     public ContaRendimento(Cliente cliente, double taxaRendimento) {
         super(cliente);
-        this.taxaRendimento = taxaRendimento;
+        this.taxaRendimento = taxaRendimento / 100;
     }
 
     @Override
     public void sacar(double valor) {
-        throw new RuntimeException("Conta Rendimento não permite saques.");
+        throw new UnsupportedOperationException("Conta Rendimento não permite saques.");
     }
 
     public void aplicarRendimento() {
         double rendimento = saldo * taxaRendimento;
-        saldo += rendimento;
-        transacoes.add(new Transacao("RENDIMENTO", rendimento));
+        depositar(rendimento);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (Conta Rendimento)";
+        return super.toString() + String.format(" (Conta Rendimento - Taxa: %.2f%%)", taxaRendimento * 100);
     }
 }
+
