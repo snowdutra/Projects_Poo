@@ -5,7 +5,7 @@ public class ContaCorrente extends Conta {
     private double limite;
 
     public ContaCorrente(Cliente cliente) {
-        this(cliente, 100000.00); 
+        this(cliente, 0);
     }
 
     public ContaCorrente(Cliente cliente, double limite) {
@@ -18,11 +18,10 @@ public class ContaCorrente extends Conta {
         if (valor < 0) {
             throw new RuntimeException("Saque negativo");
         }
-        if (valor <= (saldo + limite)) {
-            saldo -= valor;
-        } else {
+        if (valor > saldo + limite) {
             throw new RuntimeException("Limite excedido");
         }
+        saldo -= valor;
     }
 }
 

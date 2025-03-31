@@ -2,8 +2,11 @@ package poo.banco;
 
 public class ContaPoupanca extends Conta {
 
-    public ContaPoupanca(Cliente cliente) {
+    private double taxaRendimento;
+
+    public ContaPoupanca(Cliente cliente, double taxaRendimento) {
         super(cliente);
+        this.taxaRendimento = taxaRendimento / 100;
     }
 
     @Override
@@ -14,6 +17,10 @@ public class ContaPoupanca extends Conta {
             throw new IllegalArgumentException("Saldo insuficiente");
         }
         saldo -= valor;
+    }
+
+    public void aplicarRendimento() {
+        saldo += saldo * taxaRendimento;
     }
 }
 

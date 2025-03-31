@@ -51,14 +51,14 @@ public class Terminal {
                             System.err.println("Erro: Nenhuma conta selecionada.");
                             break;
                         }
-                        realizarDeposito(atualConta);
+                        deposit(atualConta);
                         break;
                     case "5":
                         if (atualConta == null) {
                             System.err.println("Erro: Nenhuma conta selecionada.");
                             break;
                         }
-                        realizarSaque(atualConta);
+                        withdraw(atualConta);
                         break;
                     case "6":
                         if (atualConta == null) {
@@ -86,7 +86,7 @@ public class Terminal {
         String tipo = scanner.nextLine().trim().toLowerCase();
 
         if (tipo.equals("f")) {
-            return new PessoaFisica(name, solicitarCpf());
+            return new PessoaFisica(name, getCPF());
         } else if (tipo.equals("j")) {
             System.out.print("CNPJ: ");
             return new PessoaJuridica(name, scanner.nextLine().trim());
@@ -96,7 +96,7 @@ public class Terminal {
         }
     }
 
-    private String solicitarCpf() {
+    private String getCPF() {
         String cpf;
         do {
             System.out.print("CPF: ");
@@ -114,18 +114,18 @@ public class Terminal {
 
         switch (tipo) {
             case "p":
-                return new ContaPoupanca(cliente);
+                return createSavingsAccount(cliente);
             case "c":
-                return criarContaCorrente(cliente);
+                return createCurrentAccount(cliente);
             case "r":
-                return criarContaRendimento(cliente);
+                return createYieldAccount(cliente);
             default:
                 System.err.println("Erro: Tipo de conta inválido.");
                 return null;
         }
     }
 
-    private ContaCorrente criarContaCorrente(Cliente cliente) {
+    private ContaCorrente createCurrentAccount(Cliente cliente) {
         System.out.print("Deseja limite? (S/N): ");
         if (scanner.nextLine().trim().equalsIgnoreCase("s")) {
             System.out.print("Informe o limite: ");
@@ -135,20 +135,26 @@ public class Terminal {
         return new ContaCorrente(cliente);
     }
 
-    private ContaRendimento criarContaRendimento(Cliente cliente) {
+    private ContaPoupanca createSavingsAccount(Cliente cliente) {
+        System.out.print("Informe a taxa de rendimento (%): ");
+        double taxa = Double.parseDouble(scanner.nextLine().trim());
+        return new ContaPoupanca(cliente, taxa);
+    }
+
+    private ContaRendimento createYieldAccount(Cliente cliente) {
         System.out.print("Informe a taxa de rendimento (%): ");
         double taxa = Double.parseDouble(scanner.nextLine().trim());
         return new ContaRendimento(cliente, taxa);
     }
 
-    private void realizarDeposito(Conta conta) {
+    private void deposit(Conta conta) {
         System.out.print("Valor do depósito: ");
         double valor = Double.parseDouble(scanner.nextLine().trim());
         conta.depositar(valor);
         System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
     }
 
-    private void realizarSaque(Conta conta) {
+    private void withdraw(Conta conta) {
         System.out.print("Valor do saque: ");
         double valor = Double.parseDouble(scanner.nextLine().trim());
         try {
