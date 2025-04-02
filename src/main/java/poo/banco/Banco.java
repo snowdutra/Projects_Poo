@@ -31,7 +31,11 @@ public class Banco {
             System.out.println("Nenhum cliente cadastrado.");
             return;
         }
-        clientes.forEach(cliente -> System.out.println(cliente.getName()));
+        clientes.forEach(cliente -> {
+            if (cliente != null) {
+                System.out.println(cliente.getName());
+            }
+        });
     }
 
     public List<Cliente> getClientes() {
