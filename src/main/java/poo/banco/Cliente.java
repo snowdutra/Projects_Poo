@@ -1,15 +1,15 @@
 package poo.banco;
 
+import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Cliente {
+public abstract class Cliente implements Identificavel { 
 
     private final String id;
     private final String name;
 
     public Cliente(String name) {
-        this.id = UUID.randomUUID().toString();
-        this.name = name;
+        this(UUID.randomUUID().toString(), name);
     }
 
     public Cliente(String id, String name) {
@@ -17,30 +17,31 @@ public abstract class Cliente {
         this.name = name;
     }
 
+    @Override
     public final String getId() {
         return id;
     }
 
-    public final String getName() {
+    @Override
+    public final String getName() { 
         return name;
     }
 
     @Override
     public String toString() {
-        return "[" + id + "]: " + name;
+        return String.format("[%s]: %s", id, name);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return 
-            (obj != null) &&
-            (obj instanceof Cliente) &&
-            ((Cliente) obj).getId().equals(id);
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Cliente cliente = (Cliente) obj;
+        return id.equals(cliente.id);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return Objects.hash(id);
     }
-    
 }

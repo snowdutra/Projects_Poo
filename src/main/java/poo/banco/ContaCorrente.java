@@ -5,7 +5,8 @@ public class ContaCorrente extends Conta {
     private double limite;
 
     public ContaCorrente(Cliente cliente) {
-        this(cliente, 0);
+        super(cliente);
+        this.limite = 0;
     }
 
     public ContaCorrente(Cliente cliente, double limite) {
@@ -13,15 +14,33 @@ public class ContaCorrente extends Conta {
         this.limite = limite;
     }
 
+    public double getLimite() {
+        return limite;
+    }
+
     @Override
     public void sacar(double valor) {
-        if (valor < 0) {
-            throw new RuntimeException("Saque negativo");
+        if (valor > saldo) {
+            throw new RuntimeException("Erro: Saldo insuficiente para realizar o saque.");
         }
-        if (valor > saldo + limite) {
-            throw new RuntimeException("Limite excedido");
+        
+        if (valor > limite) {
+            throw new RuntimeException("Erro: O valor do saque excede o limite permitido.");
         }
+
         saldo -= valor;
+        adicionarTransacao(new Transacao("Saque", valor));
+    }
+
+    @Override
+    public void depositar(double valor) {
+        saldo += valor;
+        adicionarTransacao(new Transacao("Depósito", valor));
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Conta Corrente - Limite de Saque: R$ " + limite + ")";
     }
 }
 

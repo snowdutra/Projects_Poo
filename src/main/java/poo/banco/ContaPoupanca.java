@@ -17,10 +17,26 @@ public class ContaPoupanca extends Conta {
             throw new IllegalArgumentException("Saldo insuficiente");
         }
         saldo -= valor;
+        adicionarTransacao(new Transacao("Saque", valor));
+    }
+
+    @Override
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+            adicionarTransacao(new Transacao("Depósito", valor));
+        } else {
+            throw new IllegalArgumentException("Valor do depósito deve ser positivo.");
+        }
     }
 
     public void aplicarRendimento() {
         saldo += saldo * taxaRendimento;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (Conta Poupança - Taxa de Rendimento: " + (taxaRendimento * 100) + "%)";
     }
 }
 

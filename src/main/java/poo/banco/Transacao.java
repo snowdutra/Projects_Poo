@@ -6,12 +6,12 @@ import java.time.format.DateTimeFormatter;
 public class Transacao {
     private final String tipo;
     private final double valor;
-    private final String dataHora;
+    private final LocalDateTime dataHora;
 
     public Transacao(String tipo, double valor) {
         this.tipo = tipo;
         this.valor = valor;
-        this.dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.dataHora = LocalDateTime.now();
     }
 
     public String getTipo() {
@@ -22,12 +22,14 @@ public class Transacao {
         return valor;
     }
 
-    public String getDataHora() {
+    public LocalDateTime getDataHora() {
         return dataHora;
     }
 
     @Override
     public String toString() {
-        return "[" + dataHora + "] " + tipo + ": R$ " + String.format("%.2f", valor);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return "[" + dataHora.format(formatter) + "] " + tipo + ": R$ " + String.format("%.2f", valor);
     }
 }
+

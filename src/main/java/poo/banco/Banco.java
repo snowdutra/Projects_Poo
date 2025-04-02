@@ -2,13 +2,11 @@ package poo.banco;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
 
-public final class Banco {
-
-    private final String name;
-    private final List<Cliente> clientes;
-    private final List<Conta> contas;
+public class Banco {
+    private String name;
+    private List<Cliente> clientes;
+    private List<Conta> contas;
 
     public Banco(String name) {
         this.name = name;
@@ -16,57 +14,71 @@ public final class Banco {
         this.contas = new ArrayList<>();
     }
 
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public List<Conta> getContas() {
-        return contas;
-    }
-
     public String getName() {
         return name;
     }
 
     public void adicionarCliente(Cliente cliente) {
-        clientes.add(cliente);
+        this.clientes.add(cliente);
     }
 
-    public void adicionarConta(Conta conta) {
-        contas.add(conta);
+    public void removerCliente(Cliente cliente) {
+        this.clientes.remove(cliente);
     }
 
     public void listarClientes() {
         if (clientes.isEmpty()) {
             System.out.println("Nenhum cliente cadastrado.");
-        } else {
-            clientes.forEach(System.out::println);
+            return;
         }
+        clientes.forEach(cliente -> System.out.println(cliente.getName()));
+    }
+
+    public List<Cliente> getClientes() {
+        return this.clientes;
+    }
+
+    public void adicionarConta(Conta conta) {
+        this.contas.add(conta);
+    }
+
+    public void removerConta(Conta conta) {
+        this.contas.remove(conta);
     }
 
     public void listarContas() {
         if (contas.isEmpty()) {
             System.out.println("Nenhuma conta cadastrada.");
-        } else {
-            contas.forEach(System.out::println);
+            return;
         }
+        contas.forEach(conta -> System.out.println(conta));
     }
 
-    public void removerCliente(String idCliente) {
-        Iterator<Cliente> iteratorCliente = clientes.iterator();
-        while (iteratorCliente.hasNext()) {
-            Cliente c = iteratorCliente.next();
-            if (c.getId().equals(idCliente)) {
-                iteratorCliente.remove();
-                removerContasDoCliente(idCliente);
-                System.out.println("Cliente removido com sucesso.");
-                return;
+    public List<Conta> getContas() {
+        return this.contas;
+    }
+
+    public boolean cpfJaCadastrado(String cpf) {
+        for (Cliente cliente : clientes) {
+            if (cliente instanceof PessoaFisica) {
+                PessoaFisica pf = (PessoaFisica) cliente;
+                if (pf.getCpf().equals(cpf)) {
+                    return true;
+                }
             }
         }
-        System.out.println("Cliente não encontrado.");
+        return false;
     }
 
-    private void removerContasDoCliente(String idCliente) {
-        contas.removeIf(conta -> conta.getCliente().getId().equals(idCliente));
+    public boolean cnpjJaCadastrado(String cnpj) {
+        for (Cliente cliente : clientes) {
+            if (cliente instanceof PessoaJuridica) {
+                PessoaJuridica pj = (PessoaJuridica) cliente;
+                if (pj.getCnpj().equals(cnpj)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

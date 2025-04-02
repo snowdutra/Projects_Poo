@@ -2,52 +2,51 @@ package poo.banco;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public abstract class Conta {
 
-    private final String id = UUID.randomUUID().toString();
+    protected Cliente cliente;
     protected double saldo;
-    protected final Cliente cliente;
-    private final List<Transacao> transacoes = new ArrayList<>(); // Lista de transa es
+    protected List<Transacao> transacoes;
+    protected String id;
 
     public Conta(Cliente cliente) {
         this.cliente = cliente;
-        this.saldo = 0;
-    }
-
-    public void depositar(double valor) {
-        if (valor > 0) {
-            this.saldo += valor;
-            transacoes.add(new Transacao("Deposito", valor));
-        }
+        this.saldo = 0.0;
+        this.transacoes = new ArrayList<>();
+        this.id = java.util.UUID.randomUUID().toString();
     }
 
     public abstract void sacar(double valor);
+    public abstract void depositar(double valor);
 
-    public void listarTransacoes() {
-        if (transacoes.isEmpty()) {
-            System.out.println("Nenhuma transação encontrada.");
-        } else {
-            transacoes.forEach(System.out::println);
-        }
+    public void adicionarTransacao(Transacao transacao) {
+        transacoes.add(transacao);
     }
 
-    public String getId() {
-        return id;
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 
     public double getSaldo() {
         return saldo;
     }
 
+    public List<Transacao> getTransacoes() {
+        return transacoes;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
-        return "[" + this.id + "]: " + this.saldo + " | Cliente: " + cliente.getName();
+        return cliente.getName() + " (Saldo: R$ " + saldo + ")";
     }
 }
 
