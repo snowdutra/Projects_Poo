@@ -2,7 +2,7 @@
 
 Exemplo de Hello World!
 ```java
-package poo.aula01;
+package poo.week01;
 
 public class Hello {
 
