@@ -9,18 +9,16 @@ public class OperaConta {
 
     public static void main(String[] args) {
 
-        // Criação de um cliente do tipo Pessoa Física
-        Cliente cliente = new PessoaFisica("Teodoro", "123");
+        // CPF corrigido para conter 11 dígitos
+        Cliente cliente = new PessoaFisica("teodoro", "12345678901");
 
-        // Criação de uma conta poupança para o cliente
-        Conta contaPoupanca = new ContaPoupanca(cliente);
+        // Adicionando a taxa de rendimento ao criar a ContaPoupanca
+        Conta c1 = new ContaPoupanca(cliente, 1.5); // Taxa de rendimento de 1.5%
+        System.out.println(c1);
 
-        // Exibição das informações da conta
-        System.out.println(contaPoupanca);
-
-        // Caso seja necessário criar outra conta, certifique-se de que faz sentido no contexto
-        // Exemplo: Criando outra conta para o mesmo cliente (se permitido)
-        Conta outraContaPoupanca = new ContaPoupanca(cliente);
-        System.out.println(outraContaPoupanca);
+        Conta c2 = new ContaPoupanca(cliente, 2.0); // Taxa de rendimento de 2.0%
+        System.out.println(c2);
+        
     }
+    
 }

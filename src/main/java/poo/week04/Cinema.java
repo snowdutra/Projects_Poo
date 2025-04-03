@@ -1,4 +1,4 @@
-package poo.aula04;
+package poo.week04;
 
 /* 
  * Exemplo de um Singleton
