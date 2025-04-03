@@ -1,4 +1,4 @@
-package poo.week04.colecao
+package poo.week04.colecao;
 
 import java.util.HashMap;
 import java.util.Map;
