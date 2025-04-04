@@ -25,6 +25,9 @@ public abstract class Conta {
     }
 
     public void setSaldo(double saldo) {
+        if (saldo < 0) {
+            throw new IllegalArgumentException("O saldo não pode ser negativo.");
+        }
         this.saldo = saldo;
     }
 
@@ -49,4 +52,3 @@ public abstract class Conta {
         return cliente.getName() + " (Saldo: R$ " + saldo + ")";
     }
 }
-

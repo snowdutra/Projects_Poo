@@ -6,15 +6,19 @@ public class ContaPoupanca extends Conta {
 
     public ContaPoupanca(Cliente cliente, double taxaRendimento) {
         super(cliente);
+        if (taxaRendimento < 0) {
+            throw new IllegalArgumentException("A taxa de rendimento não pode ser negativa.");
+        }
         this.taxaRendimento = taxaRendimento / 100;
     }
 
     @Override
     public void sacar(double valor) {
         if (valor < 0) {
-            throw new IllegalArgumentException("Saque negativo");
-        } else if (valor > saldo) {
-            throw new IllegalArgumentException("Saldo insuficiente");
+            throw new IllegalArgumentException("O valor do saque não pode ser negativo.");
+        }
+        if (valor > saldo) {
+            throw new IllegalArgumentException("Saldo insuficiente.");
         }
         saldo -= valor;
         adicionarTransacao(new Transacao("Saque", valor));
@@ -22,12 +26,11 @@ public class ContaPoupanca extends Conta {
 
     @Override
     public void depositar(double valor) {
-        if (valor > 0) {
-            saldo += valor;
-            adicionarTransacao(new Transacao("Depósito", valor));
-        } else {
-            throw new IllegalArgumentException("Valor do depósito deve ser positivo.");
+        if (valor < 0) {
+            throw new IllegalArgumentException("O valor do depósito não pode ser negativo.");
         }
+        saldo += valor;
+        adicionarTransacao(new Transacao("Depósito", valor));
     }
 
     public void aplicarRendimento() {
@@ -39,4 +42,3 @@ public class ContaPoupanca extends Conta {
         return super.toString() + " (Conta Poupança - Taxa de Rendimento: " + (taxaRendimento * 100) + "%)";
     }
 }
-
